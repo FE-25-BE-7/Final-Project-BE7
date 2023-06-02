@@ -20,31 +20,18 @@ module.exports = {
 
     //delete
     deleteUser: async(req, res) => {
-        let response = {}
-        let code = 200
         try {
-            const newUsers = await User.destroy({
-                where: {
-                    id: req.params.id
-                }
-            });
+            const Users = await User.findByPk(req.params.id);
 
-            response = {
-                status: "SUCCESS",
-                message: "Delete Todolist",
-                data: newUsers
+            if (!Users) {
+                return res.send('User not found');
+            } else {
+                await Users.destroy({ where: { id: req.params.id } });
+                return res.send('User deleted');
             }
         } catch (error) {
-            code = 422
-            response = {
-                status: "ERROR",
-                message: error.parent.sqlMessage
-            }
+            return res.json(error);
         }
-
-
-        res.status(code).json(response)
-        return
     }
 
 }

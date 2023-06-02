@@ -12,6 +12,7 @@ const {
 
 router.post("/api/aut/register", registerUser);
 router.post("/api/aut/login", login);
+
 // router.get("/token", getUserByToken);
 
 module.exports = router;
