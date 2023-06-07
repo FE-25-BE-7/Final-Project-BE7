@@ -7,16 +7,16 @@ module.exports = {
     // registerrr
     registerUser: async(req, res) => {
         let response = {};
-        let code = 200;
+        let code = 404;
 
         if (req.body.email == "" || req.body.email == undefined) {
-            code = 422;
+            code = 404;
             response = {
                 status: "SUCCESS",
                 message: "email cannot be blank",
             };
         } else if (req.body.password == "" || req.body.password == undefined) {
-            code = 422;
+            code = 200;
             response = {
                 status: "SUCCESS",
                 message: "password cannot be blank",
@@ -28,7 +28,6 @@ module.exports = {
                     password: req.body.password,
                     role: req.body.role,
                 });
-
                 response = {
                     status: "SUCCESS",
                     message: "Create User",
@@ -36,7 +35,7 @@ module.exports = {
                 };
             } catch (error) {
                 console.log(error)
-                code = 422;
+                code = 500;
                 response = {
                     status: "ERROR",
 
@@ -85,5 +84,6 @@ module.exports = {
             });
         }
     },
+
 
 }
