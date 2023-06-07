@@ -21,7 +21,7 @@ module.exports = {
     //delete
     deleteUser: async(req, res) => {
         try {
-            const Users = await User.findByPk(req.params.id);
+            const Users = await User.findByPk(req.body.id);
 
             if (!Users) {
                 return res.send('User not found');
