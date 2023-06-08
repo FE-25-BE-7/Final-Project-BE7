@@ -1,5 +1,4 @@
-const Donasi = require('../models').Donasi
-
+const { sequelize, Donasi, transaction, Donasis } = require('../models');
 const midtransClient = require('midtrans-client');
 
 
@@ -13,31 +12,17 @@ let snap = new midtransClient.Snap({
 module.exports = {
 
     donasiGet: async(req, res, next) => {
-        Donasi.findAll().then(data => {
-            var tampilData = data.map(item => {
-                return {
-                    // id: donasis.id,
-                    // username: Users.username,
-                    // keterangan: donasis.keterangan,
-                    // username:donasi
-                    response_midtrans: JSON.parse(item.response_midtrans),
-                    createdAt: Donasi.createdAt,
-                    updatedAt: Donasi.updatedAt
-                }
-            });
-            res.json({
-                status: true,
-                pesan: "Berhasil Tampil",
-                data: tampilData
-            });
-        }).catch(err => {
+        try {
+            // Mengambil semua data donasi yang berhasil
+            const donasi = await Donasi.findAll();
 
-            res.json({
-                status: false,
-                pesan: "Gagal tampil: " + err.message,
-                data: []
-            });
-        });
+            // Mengirimkan data donasi ke client
+            res.status(200).json(donasi);
+        } catch (error) {
+            // Menangani error jika terjadi
+            console.log('Error occurred:', error);
+            res.status(500).send({ error: error.message });
+        }
 
 
     },
@@ -62,19 +47,35 @@ module.exports = {
                 "phone": "088233459375"
             }
         };
-
+        // Donasi Snap
         snap.createTransaction(parameter)
             .then((transaction) => {
-                // transaction token
                 let transactionToken = transaction.token;
-                console.log('Transaction Aksess Token:', transactionToken);
+                console.log('Transaction Access Token:', transactionToken);
 
-                // Mengirimkan response dengan token ke Postman
-                res.send({ token: transactionToken });
+                sequelize.sync() // Mengecek dan membuat tabel jika belum ada
+                    .then(() => {
+                        return Donasi.create({
+                            order_id: parameter.transaction_details.order_id,
+                            gross_amount: parameter.transaction_details.gross_amount,
+                            customer_first_name: parameter.customer_details.first_name,
+                            customer_last_name: parameter.customer_details.last_name,
+                            customer_email: parameter.customer_details.email,
+                            customer_phone: parameter.customer_details.phone,
+                            transaction_token: transactionToken
+                        });
+                    })
+                    .then(() => {
+                        console.log('Transaction saved to database');
+                        res.send({ token: transactionToken });
+                    })
+                    .catch((error) => {
+                        console.log('Error saving transaction to database:', error);
+                        res.status(500).send({ error: error.message });
+                    });
             })
             .catch((error) => {
                 console.log('Error occurred:', error);
-                // Mengirimkan response error ke Postman
                 res.status(500).send({ error: error.message });
             });
 
