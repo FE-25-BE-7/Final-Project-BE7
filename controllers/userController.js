@@ -9,11 +9,11 @@ module.exports = {
         let response = {};
         let code = 404;
 
-        if (req.body.email == "" || req.body.email == undefined) {
+        if (req.body.username == "" || req.body.username == undefined) {
             code = 404;
             response = {
                 status: "SUCCESS",
-                message: "email cannot be blank",
+                message: "username cannot be blank",
             };
         } else if (req.body.password == "" || req.body.password == undefined) {
             code = 200;
@@ -24,7 +24,7 @@ module.exports = {
         } else {
             try {
                 const newUser = await User.create({
-                    email: req.body.email,
+                    username: req.body.username,
                     password: req.body.password,
                     role: req.body.role,
                 });
@@ -49,8 +49,8 @@ module.exports = {
 
     login: async(req, res) => {
         try {
-            const { email, password } = req.body;
-            const Users = await User.findOne({ where: { email } });
+            const { username, password } = req.body;
+            const Users = await User.findOne({ where: { username } });
             if (!Users) {
                 return res.status(404).json({
                     message: "User not found",
@@ -62,13 +62,13 @@ module.exports = {
                 code = 401;
                 response = {
                     status: "ERROR",
-                    message: "Invalid email or password"
+                    message: "Invalid username or password"
                 };
                 res.status(code).json(response);
                 return;
             }
             // Menghasilkan token dengan email pengguna
-            const token = jwt.sign({ email: Users.email }, process.env.TOKEN_SECRET, {
+            const token = jwt.sign({ username: Users.username }, process.env.TOKEN_SECRET, {
                 expiresIn: "1h",
             });
 
