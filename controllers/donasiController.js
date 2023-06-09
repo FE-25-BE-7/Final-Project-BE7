@@ -1,7 +1,10 @@
 const { sequelize, Donasi, transaction, Donasis } = require('../models');
 const midtransClient = require('midtrans-client');
+const { v4: uuidv4 } = require('uuid');
+const uuid = require("uuid");
 
 const bodyParser = require('body-parser');
+const { or } = require('sequelize');
 let snap = new midtransClient.Snap({
     isProduction: false,
     serverKey: "SB-Mid-server-owqp3Dn3Ri5eRZdVikXXbsMU",
@@ -36,7 +39,7 @@ module.exports = {
 
         let parameter = {
             transaction_details: {
-                order_id: order_id,
+                order_id: uuid.v4(),
                 gross_amount: gross_amount
             },
             credit_card: {
@@ -68,11 +71,11 @@ module.exports = {
                         });
                     })
                     .then(() => {
-                        console.log('Transaction saved to database');
+                        console.log('Transaction Suksessss');
                         res.send({ token: transactionToken });
                     })
                     .catch((error) => {
-                        console.log('Error saving transaction to database:', error);
+                        console.log('Error :', error);
                         res.status(500).send({ error: error.message });
                     });
             })
