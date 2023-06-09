@@ -17,10 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         user_id: DataTypes.INTEGER,
         order_id: DataTypes.STRING,
         gross_amount: DataTypes.INTEGER,
-        customer_first_name: DataTypes.STRING,
-        customer_last_name: DataTypes.STRING,
-        customer_email: DataTypes.STRING,
-        customer_phone: DataTypes.STRING,
+        first_name: DataTypes.STRING,
+        last_name: DataTypes.STRING,
+        email: DataTypes.STRING,
+        phone: DataTypes.STRING,
         transaction_token: DataTypes.STRING
 
 

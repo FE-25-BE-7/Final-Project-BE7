@@ -1,7 +1,7 @@
 const { sequelize, Donasi, transaction, Donasis } = require('../models');
 const midtransClient = require('midtrans-client');
 
-
+const bodyParser = require('body-parser');
 let snap = new midtransClient.Snap({
     isProduction: false,
     serverKey: "SB-Mid-server-owqp3Dn3Ri5eRZdVikXXbsMU",
@@ -31,37 +31,39 @@ module.exports = {
 
     //isi data req donasi token
 
-    reqDonasi: async(req, res, next) => {
+    reqDonasi: (req, res) => {
+        const { order_id, gross_amount, first_name, last_name, email, phone } = req.body;
+
         let parameter = {
-            "transaction_details": {
-                "order_id": "YOUR-ORDERID-123456",
-                "gross_amount": 600000
+            transaction_details: {
+                order_id: order_id,
+                gross_amount: gross_amount
             },
-            "credit_card": {
-                "secure": true
+            credit_card: {
+                secure: true
             },
-            "customer_details": {
-                "first_name": "akbar",
-                "last_name": "lancar",
-                "email": "akbar@gmail.com",
-                "phone": "088233459375"
+            Donasi_details: {
+                first_name: first_name,
+                last_name: last_name,
+                email: email,
+                phone: phone
             }
         };
-        // Donasi Snap
+
         snap.createTransaction(parameter)
             .then((transaction) => {
                 let transactionToken = transaction.token;
                 console.log('Transaction Access Token:', transactionToken);
 
-                sequelize.sync() // Mengecek dan membuat tabel jika belum ada
+                sequelize.sync()
                     .then(() => {
                         return Donasi.create({
                             order_id: parameter.transaction_details.order_id,
                             gross_amount: parameter.transaction_details.gross_amount,
-                            customer_first_name: parameter.customer_details.first_name,
-                            customer_last_name: parameter.customer_details.last_name,
-                            customer_email: parameter.customer_details.email,
-                            customer_phone: parameter.customer_details.phone,
+                            first_name: parameter.Donasi_details.first_name,
+                            last_name: parameter.Donasi_details.last_name,
+                            email: parameter.Donasi_details.email,
+                            phone: parameter.Donasi_details.phone,
                             transaction_token: transactionToken
                         });
                     })
@@ -78,6 +80,5 @@ module.exports = {
                 console.log('Error occurred:', error);
                 res.status(500).send({ error: error.message });
             });
-
     }
 }
