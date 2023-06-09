@@ -15,9 +15,14 @@ module.exports = (sequelize, DataTypes) => {
     }
     Donasi.init({
         user_id: DataTypes.INTEGER,
-        keterangan: DataTypes.STRING,
-        username: DataTypes.STRING,
-        response_midtrans: DataTypes.TEXT
+        order_id: DataTypes.STRING,
+        gross_amount: DataTypes.INTEGER,
+        first_name: DataTypes.STRING,
+        last_name: DataTypes.STRING,
+        email: DataTypes.STRING,
+        phone: DataTypes.STRING,
+        transaction_token: DataTypes.STRING
+
 
     }, {
         sequelize,

@@ -1,8 +1,10 @@
-const Donasi = require('../models').Donasi
-
+const { sequelize, Donasi, transaction, Donasis } = require('../models');
 const midtransClient = require('midtrans-client');
+const { v4: uuidv4 } = require('uuid');
+const uuid = require("uuid");
 
-
+const bodyParser = require('body-parser');
+const { or } = require('sequelize');
 let snap = new midtransClient.Snap({
     isProduction: false,
     serverKey: "SB-Mid-server-owqp3Dn3Ri5eRZdVikXXbsMU",
@@ -13,31 +15,17 @@ let snap = new midtransClient.Snap({
 module.exports = {
 
     donasiGet: async(req, res, next) => {
-        Donasi.findAll().then(data => {
-            var tampilData = data.map(item => {
-                return {
-                    // id: donasis.id,
-                    // username: Users.username,
-                    // keterangan: donasis.keterangan,
-                    // username:donasi
-                    response_midtrans: JSON.parse(item.response_midtrans),
-                    createdAt: Donasi.createdAt,
-                    updatedAt: Donasi.updatedAt
-                }
-            });
-            res.json({
-                status: true,
-                pesan: "Berhasil Tampil",
-                data: tampilData
-            });
-        }).catch(err => {
+        try {
+            // Mengambil semua data donasi yang berhasil
+            const donasi = await Donasi.findAll();
 
-            res.json({
-                status: false,
-                pesan: "Gagal tampil: " + err.message,
-                data: []
-            });
-        });
+            // Mengirimkan data donasi ke client
+            res.status(200).json(donasi);
+        } catch (error) {
+            // Menangani error jika terjadi
+            console.log('Error occurred:', error);
+            res.status(500).send({ error: error.message });
+        }
 
 
     },
@@ -46,37 +34,54 @@ module.exports = {
 
     //isi data req donasi token
 
-    reqDonasi: async(req, res, next) => {
+    reqDonasi: (req, res) => {
+        const { order_id, gross_amount, first_name, last_name, email, phone } = req.body;
+
         let parameter = {
-            "transaction_details": {
-                "order_id": "YOUR-ORDERID-123456",
-                "gross_amount": 1000000
+            transaction_details: {
+                order_id: uuid.v4(),
+                gross_amount: gross_amount
             },
-            "credit_card": {
-                "secure": true
+            credit_card: {
+                secure: true
             },
-            "customer_details": {
-                "first_name": "ilham",
-                "last_name": "lancar",
-                "email": "ilham@gmail.com",
-                "phone": "088233459375"
+            Donasi_details: {
+                first_name: first_name,
+                last_name: last_name,
+                email: email,
+                phone: phone
             }
         };
 
         snap.createTransaction(parameter)
             .then((transaction) => {
-                // transaction token
                 let transactionToken = transaction.token;
-                console.log('Transaction Aksess Token:', transactionToken);
+                console.log('Transaction Access Token:', transactionToken);
 
-                // Mengirimkan response dengan token ke Postman
-                res.send({ token: transactionToken });
+                sequelize.sync()
+                    .then(() => {
+                        return Donasi.create({
+                            order_id: parameter.transaction_details.order_id,
+                            gross_amount: parameter.transaction_details.gross_amount,
+                            first_name: parameter.Donasi_details.first_name,
+                            last_name: parameter.Donasi_details.last_name,
+                            email: parameter.Donasi_details.email,
+                            phone: parameter.Donasi_details.phone,
+                            transaction_token: transactionToken
+                        });
+                    })
+                    .then(() => {
+                        console.log('Transaction Suksessss');
+                        res.send({ token: transactionToken });
+                    })
+                    .catch((error) => {
+                        console.log('Error :', error);
+                        res.status(500).send({ error: error.message });
+                    });
             })
             .catch((error) => {
                 console.log('Error occurred:', error);
-                // Mengirimkan response error ke Postman
                 res.status(500).send({ error: error.message });
             });
-
     }
 }
