@@ -35,15 +35,15 @@ module.exports = {
         let parameter = {
             "transaction_details": {
                 "order_id": "YOUR-ORDERID-123456",
-                "gross_amount": 1000000
+                "gross_amount": 600000
             },
             "credit_card": {
                 "secure": true
             },
             "customer_details": {
-                "first_name": "ilham",
+                "first_name": "akbar",
                 "last_name": "lancar",
-                "email": "ilham@gmail.com",
+                "email": "akbar@gmail.com",
                 "phone": "088233459375"
             }
         };
