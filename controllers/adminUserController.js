@@ -6,7 +6,6 @@ module.exports = {
     getAllUser: async(req, res) => {
         try {
             const Users = await User.findAll();
-
             // Filter pengguna berdasarkan peran "user"
             const userRole = 'user';
             const filteredUsers = Users.filter(user => user.role === userRole);
@@ -26,7 +25,7 @@ module.exports = {
             if (!Users) {
                 return res.send('User not found');
             } else {
-                await Users.destroy({ where: { id: req.params.id } });
+                await Users.destroy({ where: { id: req.body.id } });
                 return res.send('User deleted');
             }
         } catch (error) {

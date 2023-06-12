@@ -14,16 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     Donasi.init({
-        user_id: DataTypes.INTEGER,
         order_id: DataTypes.STRING,
         gross_amount: DataTypes.INTEGER,
-        first_name: DataTypes.STRING,
-        last_name: DataTypes.STRING,
+        name: DataTypes.STRING,
         email: DataTypes.STRING,
         phone: DataTypes.STRING,
         transaction_token: DataTypes.STRING
-
-
     }, {
         sequelize,
         modelName: 'Donasi',

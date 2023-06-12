@@ -13,7 +13,7 @@ let snap = new midtransClient.Snap({
 });
 
 module.exports = {
-
+    // nampilin user donasi
     donasiGet: async(req, res, next) => {
         try {
             // Mengambil semua data donasi yang berhasil
@@ -35,7 +35,7 @@ module.exports = {
     //isi data req donasi token
 
     reqDonasi: (req, res) => {
-        const { order_id, gross_amount, first_name, last_name, email, phone } = req.body;
+        const { order_id, jml_Donasi, gross_amount, name, email, phone } = req.body;
 
         let parameter = {
             transaction_details: {
@@ -46,8 +46,7 @@ module.exports = {
                 secure: true
             },
             Donasi_details: {
-                first_name: first_name,
-                last_name: last_name,
+                name: name,
                 email: email,
                 phone: phone
             }
@@ -63,8 +62,7 @@ module.exports = {
                         return Donasi.create({
                             order_id: parameter.transaction_details.order_id,
                             gross_amount: parameter.transaction_details.gross_amount,
-                            first_name: parameter.Donasi_details.first_name,
-                            last_name: parameter.Donasi_details.last_name,
+                            name: parameter.Donasi_details.name,
                             email: parameter.Donasi_details.email,
                             phone: parameter.Donasi_details.phone,
                             transaction_token: transactionToken
