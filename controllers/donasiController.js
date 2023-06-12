@@ -29,9 +29,6 @@ module.exports = {
 
 
     },
-
-
-
     //isi data req donasi token
 
     reqDonasi: (req, res) => {
