@@ -1,9 +1,8 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
-'use strict';
 module.exports = {
-    up: async(queryInterface, Sequelize) => {
-        await queryInterface.createTable('Donasis', {
+    async up(queryInterface, Sequelize) {
+        await queryInterface.createTable('donasis', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -45,6 +44,6 @@ module.exports = {
         });
     },
     down: async(queryInterface, Sequelize) => {
-        await queryInterface.dropTable('Donasis');
+        await queryInterface.dropTable('donasis');
     }
 };
