@@ -12,7 +12,7 @@ dotenv.config();
 // access config var
 process.env.TOKEN_SECRET;
 
-const PORT = 3000;
+const PORT = 5894;
 
 app.use(express.json());
 app.use(AllRoutes);
