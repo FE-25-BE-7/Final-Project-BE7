@@ -56,7 +56,7 @@ module.exports = {
 
                 sequelize.sync()
                     .then(() => {
-                        return Donasi.create({
+                        return donasi.create({
                             order_id: parameter.transaction_details.order_id,
                             gross_amount: parameter.transaction_details.gross_amount,
                             name: parameter.Donasi_details.name,
