@@ -24,6 +24,8 @@ module.exports = {
             });
         }
 
+        res.status(200).json(response)
+        return
     },
 
     getDetailArtikel: async(req, res) => {
@@ -33,7 +35,7 @@ module.exports = {
                 id: req.body.id
             }
         });
-
+    
         if (artikels.length == 0) {
             response = {
                 status: "SUCCESS",
@@ -47,6 +49,7 @@ module.exports = {
             }
 
         }
+    
         res.status(200).json(response)
         return
     },
@@ -82,7 +85,48 @@ module.exports = {
                 message: "description cannot be blank"
             }
         }
-
+        if (req.body.one == "" || req.body.one == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "one cannot be blank"
+            }
+        }
+        if (req.body.two == "" || req.body.two == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "two cannot be blank"
+            }
+        }
+        if (req.body.three == "" || req.body.three == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "three cannot be blank"
+            }
+        }
+        if (req.body.four == "" || req.body.four == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "four cannot be blank"
+            }
+        }
+        if (req.body.five == "" || req.body.five == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "five cannot be blank"
+            }
+        }
+        if (req.body.six == "" || req.body.six == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "six cannot be blank"
+            }
+        }
         try {
             const newArtikel = await artikel.create({
                 author: req.body.author,
@@ -90,7 +134,7 @@ module.exports = {
                 image: req.body.image,
                 description: req.body.description
             });
-
+    
             response = {
                 status: "SUCCESS",
                 message: "Create Artikel",
@@ -104,7 +148,7 @@ module.exports = {
                 message: error.parent.sqlMessage
             }
         }
-
+    
         res.status(code).json(response)
         return
     },
@@ -140,13 +184,13 @@ module.exports = {
                 message: "description cannot be blank"
             }
         }
-
+    
         const artikels = await artikel.findOne({
             where: {
                 id: req.params.id
             }
         });
-
+    
         if (!artikels) {
             response = {
                 status: "SUCCESS",
@@ -154,9 +198,9 @@ module.exports = {
             }
         } else {
             artikels.author = req.body.author,
-                artikels.title = req.body.title,
-                artikels.image = req.body.image,
-                artikels.description = req.body.description
+            artikels.title = req.body.title,
+            artikels.image = req.body.image,
+            artikels.description = req.body.description
             artikels.save()
             response = {
                 status: "SUCCESS",
@@ -164,7 +208,7 @@ module.exports = {
                 data: artikels
             }
         }
-
+    
         res.status(code).json(response)
         return
     },
@@ -177,7 +221,7 @@ module.exports = {
                 where: {},
                 truncate: true
             });
-
+    
             response = {
                 status: "SUCCESS",
                 message: "Delete Artikel All",
@@ -194,8 +238,8 @@ module.exports = {
         res.status(code).json(response)
         return
     },
-
-    deleteArtikel: async(req, res) => {
+    
+    deleteArtikel: async (req, res) => {
         let response = {}
         let code = 200
         try {

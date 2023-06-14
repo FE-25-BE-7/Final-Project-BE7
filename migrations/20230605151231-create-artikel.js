@@ -32,6 +32,24 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false
             },
+            one: {
+                type: Sequelize.STRING
+            },
+            two: {
+                type: Sequelize.STRING
+            },
+            three: {
+                type: Sequelize.STRING
+            },
+            four: {
+                type: Sequelize.STRING
+            },
+            five: {
+                type: Sequelize.STRING
+            },
+            six: {
+                type: Sequelize.STRING
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
