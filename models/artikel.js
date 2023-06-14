@@ -18,7 +18,13 @@ module.exports = (sequelize, DataTypes) => {
     author: DataTypes.STRING,
     title: DataTypes.STRING,
     image: DataTypes.STRING,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    one: DataTypes.STRING,
+    two: DataTypes.STRING,
+    three: DataTypes.STRING,
+    four: DataTypes.STRING,
+    five: DataTypes.STRING,
+    six: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'artikel',
