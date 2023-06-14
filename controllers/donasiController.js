@@ -56,7 +56,7 @@ module.exports = {
 
                 sequelize.sync()
                     .then(() => {
-                        return donasi.create({
+                        return Donasi.create({
                             order_id: parameter.transaction_details.order_id,
                             gross_amount: parameter.transaction_details.gross_amount,
                             name: parameter.Donasi_details.name,
@@ -65,9 +65,9 @@ module.exports = {
                             transaction_token: transactionToken
                         });
                     })
-                    .then(() => {
+                    .then((transaction) => {
                         console.log('Transaction Suksessss');
-                        res.send({ token: transactionToken });
+                        res.send({ token: transaction });
                     })
                     .catch((error) => {
                         console.log('Error :', error);
