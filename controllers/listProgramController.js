@@ -1,4 +1,4 @@
-const ListProgram = require('../models').ListProgram;
+const ListProgram = require('../models').listProgram;
 
 module.exports = {
     getPrograms: async(req, res) => {
