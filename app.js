@@ -1,3 +1,4 @@
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
@@ -18,6 +19,7 @@ process.env.TOKEN_SECRET;
 
 const PORT = 5894;
 
+app.use(cors());
 app.use(express.json());
 app.use(user);
 app.use(donasi);
