@@ -1,4 +1,4 @@
-const { sequelize, Donasi, transaction, Donasis } = require('../models');
+const { sequelize, donasi, transaction, donasis } = require('../models');
 const midtransClient = require('midtrans-client');
 const { v4: uuidv4 } = require('uuid');
 const uuid = require("uuid");
@@ -17,10 +17,10 @@ module.exports = {
     donasiGet: async(req, res, next) => {
         try {
             // Mengambil semua data donasi yang berhasil
-            const donasi = await Donasi.findAll();
+            const donasis = await donasi.findAll();
 
             // Mengirimkan data donasi ke client
-            res.status(200).json(donasi);
+            res.status(200).json(donasis);
         } catch (error) {
             // Menangani error jika terjadi
             console.log('Error occurred:', error);
@@ -56,7 +56,7 @@ module.exports = {
 
                 sequelize.sync()
                     .then(() => {
-                        return Donasi.create({
+                        return donasi.create({
                             order_id: parameter.transaction_details.order_id,
                             gross_amount: parameter.transaction_details.gross_amount,
                             name: parameter.Donasi_details.name,
