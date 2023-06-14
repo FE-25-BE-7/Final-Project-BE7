@@ -9,14 +9,6 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            user_id: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'users',
-                    key: 'id'
-                }
-            },
             author: {
                 type: Sequelize.STRING,
                 allowNull: false
@@ -24,6 +16,9 @@ module.exports = {
             title: {
                 type: Sequelize.STRING,
                 allowNull: false
+            },
+            date: {
+                type: Sequelize.STRING,
             },
             image: {
                 type: Sequelize.STRING,

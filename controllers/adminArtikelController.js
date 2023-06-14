@@ -71,6 +71,13 @@ module.exports = {
                 message: "title cannot be blank"
             }
         }
+        if (req.body.date == "" || req.body.date == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "date cannot be blank"
+            }
+        }
         if (req.body.image == "" || req.body.image == undefined) {
             code = 422
             response = {
@@ -132,7 +139,14 @@ module.exports = {
                 author: req.body.author,
                 title: req.body.title,
                 image: req.body.image,
-                description: req.body.description
+                date: req.body.date,
+                description: req.body.description,
+                one: req.body.one,
+                two: req.body.two,
+                three: req.body.three,
+                four: req.body.four,
+                five: req.body.five,
+                six: req.body.six,
             });
     
             response = {
@@ -153,115 +167,115 @@ module.exports = {
         return
     },
 
-    updateArtikel: async(req, res) => {
-        let response = {}
-        let code = 200
-        if (req.body.author == "" || req.body.author == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "author cannot be blank"
-            }
-        }
-        if (req.body.title == "" || req.body.title == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "title cannot be blank"
-            }
-        }
-        if (req.body.image == "" || req.body.image == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "image cannot be blank"
-            }
-        }
-        if (req.body.description == "" || req.body.description == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "description cannot be blank"
-            }
-        }
+    // updateArtikel: async(req, res) => {
+    //     let response = {}
+    //     let code = 200
+    //     if (req.body.author == "" || req.body.author == undefined) {
+    //         code = 422
+    //         response = {
+    //             status: "SUCCESS",
+    //             message: "author cannot be blank"
+    //         }
+    //     }
+    //     if (req.body.title == "" || req.body.title == undefined) {
+    //         code = 422
+    //         response = {
+    //             status: "SUCCESS",
+    //             message: "title cannot be blank"
+    //         }
+    //     }
+    //     if (req.body.image == "" || req.body.image == undefined) {
+    //         code = 422
+    //         response = {
+    //             status: "SUCCESS",
+    //             message: "image cannot be blank"
+    //         }
+    //     }
+    //     if (req.body.description == "" || req.body.description == undefined) {
+    //         code = 422
+    //         response = {
+    //             status: "SUCCESS",
+    //             message: "description cannot be blank"
+    //         }
+    //     }
     
-        const artikels = await artikel.findOne({
-            where: {
-                id: req.params.id
-            }
-        });
+    //     const artikels = await artikel.findOne({
+    //         where: {
+    //             id: req.params.id
+    //         }
+    //     });
     
-        if (!artikels) {
-            response = {
-                status: "SUCCESS",
-                message: "Data not Found"
-            }
-        } else {
-            artikels.author = req.body.author,
-            artikels.title = req.body.title,
-            artikels.image = req.body.image,
-            artikels.description = req.body.description
-            artikels.save()
-            response = {
-                status: "SUCCESS",
-                message: "Update Artikel",
-                data: artikels
-            }
-        }
+    //     if (!artikels) {
+    //         response = {
+    //             status: "SUCCESS",
+    //             message: "Data not Found"
+    //         }
+    //     } else {
+    //         artikels.author = req.body.author,
+    //         artikels.title = req.body.title,
+    //         artikels.image = req.body.image,
+    //         artikels.description = req.body.description
+    //         artikels.save()
+    //         response = {
+    //             status: "SUCCESS",
+    //             message: "Update Artikel",
+    //             data: artikels
+    //         }
+    //     }
     
-        res.status(code).json(response)
-        return
-    },
+    //     res.status(code).json(response)
+    //     return
+    // },
 
-    deleteAllArtikel: async(req, res) => {
-        let response = {}
-        let code = 200
-        try {
-            const artikels = await artikel.destroy({
-                where: {},
-                truncate: true
-            });
+    // deleteAllArtikel: async(req, res) => {
+    //     let response = {}
+    //     let code = 200
+    //     try {
+    //         const artikels = await artikel.destroy({
+    //             where: {},
+    //             truncate: true
+    //         });
     
-            response = {
-                status: "SUCCESS",
-                message: "Delete Artikel All",
-                data: artikels
-            }
-        } catch (error) {
-            code = 422
-            response = {
-                status: "ERROR",
-                message: error.parent.sqlMessage
-            }
-        }
+    //         response = {
+    //             status: "SUCCESS",
+    //             message: "Delete Artikel All",
+    //             data: artikels
+    //         }
+    //     } catch (error) {
+    //         code = 422
+    //         response = {
+    //             status: "ERROR",
+    //             message: error.parent.sqlMessage
+    //         }
+    //     }
 
-        res.status(code).json(response)
-        return
-    },
+    //     res.status(code).json(response)
+    //     return
+    // },
     
-    deleteArtikel: async (req, res) => {
-        let response = {}
-        let code = 200
-        try {
-            const artikels = await artikel.destroy({
-                where: {
-                    id: req.params.id
-                }
-            });
+    // deleteArtikel: async (req, res) => {
+    //     let response = {}
+    //     let code = 200
+    //     try {
+    //         const artikels = await artikel.destroy({
+    //             where: {
+    //                 id: req.params.id
+    //             }
+    //         });
 
-            response = {
-                status: "SUCCESS",
-                message: "Delete Artikel"
-            }
-        } catch (error) {
-            code = 422
-            response = {
-                status: "ERROR",
-                message: error.parent.sqlMessage
-            }
-        }
+    //         response = {
+    //             status: "SUCCESS",
+    //             message: "Delete Artikel"
+    //         }
+    //     } catch (error) {
+    //         code = 422
+    //         response = {
+    //             status: "ERROR",
+    //             message: error.parent.sqlMessage
+    //         }
+    //     }
 
-        res.status(code).json(response)
-        return
-    }
+    //     res.status(code).json(response)
+    //     return
+    // }
 }
