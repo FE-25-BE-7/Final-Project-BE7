@@ -3,7 +3,7 @@ const volunteer = require('../models').volunteer
 module.exports = {
 
     //Melihat semua user
-    getAllVolunteer: async (req, res) => {
+    getAllVolunteer: async(req, res) => {
 
         const volunteers = await volunteer.findAll();
         const response = {
@@ -19,7 +19,7 @@ module.exports = {
         return
     },
 
-    getDetailVolunteer: async (req, res) => {
+    getDetailVolunteer: async(req, res) => {
         let response = {}
         const volunteers = await volunteer.findAll({
             where: {
@@ -44,7 +44,7 @@ module.exports = {
         return
     },
 
-    daftarVolunteer: async (req, res) => {
+    daftarVolunteer: async(req, res) => {
         let response = {}
         let code = 200
         if (req.body.user_id == "" || req.body.user_id == undefined) {

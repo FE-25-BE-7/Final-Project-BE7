@@ -3,30 +3,37 @@ const artikel = require('../models').artikel
 module.exports = {
 
     //Melihat semua user
-    getAllArtikel: async (req, res) => {
+    getAllArtikel: async(req, res) => {
+        try {
+            const artikels = await artikel.findAll();
+            const response = {
+                status: "SUCCESS",
+                message: "Get All Artikel",
+                meta: {
+                    total: artikels.length
+                },
+                data: artikels
+            };
 
-        const artikels = await artikel.findAll();
-        const response = {
-            status: "SUCCESS",
-            message: "Get All Artikel",
-            meta: {
-                total: artikels.length
-            },
-            data: artikels
+            res.status(200).json(response);
+        } catch (error) {
+            console.error("Error occurred:", error);
+            res.status(500).json({
+                status: "ERROR",
+                message: "Internal Server Error"
+            });
         }
-    
-        res.status(200).json(response)
-        return
+
     },
 
-    getDetailArtikel: async (req, res) => {
+    getDetailArtikel: async(req, res) => {
         let response = {}
         const artikels = await artikel.findAll({
             where: {
-                id: req.params.id
+                id: req.body.id
             }
         });
-    
+
         if (artikels.length == 0) {
             response = {
                 status: "SUCCESS",
@@ -38,13 +45,13 @@ module.exports = {
                 message: "Get Detail Artikel",
                 data: artikels
             }
+
         }
-    
         res.status(200).json(response)
         return
     },
 
-    createArtikel: async (req, res) => {
+    createArtikel: async(req, res) => {
         let response = {}
         let code = 200
         if (req.body.author == "" || req.body.author == undefined) {
@@ -83,25 +90,26 @@ module.exports = {
                 image: req.body.image,
                 description: req.body.description
             });
-    
+
             response = {
                 status: "SUCCESS",
                 message: "Create Artikel",
                 data: newArtikel
             }
         } catch (error) {
+            console.log(error)
             code = 422
             response = {
                 status: "ERROR",
                 message: error.parent.sqlMessage
             }
         }
-    
+
         res.status(code).json(response)
         return
     },
 
-    updateArtikel: async (req, res) => {
+    updateArtikel: async(req, res) => {
         let response = {}
         let code = 200
         if (req.body.author == "" || req.body.author == undefined) {
@@ -132,13 +140,13 @@ module.exports = {
                 message: "description cannot be blank"
             }
         }
-    
+
         const artikels = await artikel.findOne({
             where: {
                 id: req.params.id
             }
         });
-    
+
         if (!artikels) {
             response = {
                 status: "SUCCESS",
@@ -146,9 +154,9 @@ module.exports = {
             }
         } else {
             artikels.author = req.body.author,
-            artikels.title = req.body.title,
-            artikels.image = req.body.image,
-            artikels.description = req.body.description
+                artikels.title = req.body.title,
+                artikels.image = req.body.image,
+                artikels.description = req.body.description
             artikels.save()
             response = {
                 status: "SUCCESS",
@@ -156,12 +164,12 @@ module.exports = {
                 data: artikels
             }
         }
-    
+
         res.status(code).json(response)
         return
     },
 
-    deleteAllArtikel: async (req, res) => {
+    deleteAllArtikel: async(req, res) => {
         let response = {}
         let code = 200
         try {
@@ -169,7 +177,7 @@ module.exports = {
                 where: {},
                 truncate: true
             });
-    
+
             response = {
                 status: "SUCCESS",
                 message: "Delete Artikel All",
@@ -182,12 +190,12 @@ module.exports = {
                 message: error.parent.sqlMessage
             }
         }
-    
+
         res.status(code).json(response)
         return
     },
-    
-    deleteArtikel: async (req, res) => {
+
+    deleteArtikel: async(req, res) => {
         let response = {}
         let code = 200
         try {
@@ -196,7 +204,7 @@ module.exports = {
                     id: req.params.id
                 }
             });
-    
+
             response = {
                 status: "SUCCESS",
                 message: "Delete Artikel"
