@@ -7,10 +7,10 @@ module.exports = {
     // registerrr
     registerUser: async(req, res) => {
         let response = {};
-        let code = 404;
+        let code = 200;
 
         if (req.body.username == "" || req.body.username == undefined) {
-            code = 404;
+            code = 200;
             response = {
                 status: "SUCCESS",
                 message: "username cannot be blank",
