@@ -137,8 +137,8 @@ module.exports = {
             const newArtikel = await artikel.create({
                 author: req.body.author,
                 title: req.body.title,
-                image: req.body.image,
                 date: req.body.date,
+                image: req.body.image,
                 description: req.body.description,
                 one: req.body.one,
                 two: req.body.two,
