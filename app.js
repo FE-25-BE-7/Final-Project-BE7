@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const user = require("./routes/userRouter");
-const adminRoutes = require("./routes/adminUserRouter");
+const adminRoute = require("./routes/adminUserRouter");
 const donasi = require("./routes/donasiRouter");
 const artikel = require("./routes/adminArtikelRouter");
 const progam = require("./routes/adminProgramRouter")
@@ -21,7 +21,7 @@ const PORT = 5894;
 app.use(express.json());
 app.use(user);
 app.use(donasi);
-app.use(adminRoutes);
+app.use(adminRoute);
 app.use(artikel);
 app.use(progam);
 app.use(volunteer);
