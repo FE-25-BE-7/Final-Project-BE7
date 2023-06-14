@@ -7,6 +7,7 @@ const donasiRoute = require("./routes/donasiRouter");
 const artikel = require("./routes/adminArtikelRouter");
 const progam = require("./routes/adminProgramRouter")
 const volunteer = require("./routes/volunteerRouter")
+const listProgram = require("./routes/listProgramRouter")
 
 
 // get config vars
@@ -24,6 +25,7 @@ app.use(routes);
 app.use(artikel);
 app.use(progam);
 app.use(volunteer);
+app.use(listProgram);
 
 app.listen(PORT, () => {
         console.log(`Server berjalan di port ${PORT}`);
