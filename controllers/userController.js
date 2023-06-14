@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('../models').user
+const user = require('../models').user
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
@@ -23,7 +23,7 @@ module.exports = {
             };
         } else {
             try {
-                const newUser = await User.create({
+                const newUser = await user.create({
                     username: req.body.username,
                     password: req.body.password,
                     role: req.body.role,
@@ -50,15 +50,15 @@ module.exports = {
     login: async(req, res) => {
         try {
             const { username, password } = req.body;
-            const Users = await User.findOne({ where: { username } });
-            if (!Users) {
+            const users = await user.findOne({ where: { username } });
+            if (!users) {
                 return res.status(404).json({
                     message: "User not found",
                 });
             }
 
             // Membandingkan password
-            if (Users.password !== password) {
+            if (users.password !== password) {
                 code = 401;
                 response = {
                     status: "ERROR",
@@ -68,7 +68,7 @@ module.exports = {
                 return;
             }
             // Menghasilkan token dengan email pengguna
-            const token = jwt.sign({ username: Users.username }, process.env.TOKEN_SECRET, {
+            const token = jwt.sign({ username: users.username }, process.env.TOKEN_SECRET, {
                 expiresIn: "1h",
             });
 

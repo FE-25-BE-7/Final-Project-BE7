@@ -1,14 +1,14 @@
-const User = require('../models').user
+const user = require('../models').user
 
 module.exports = {
 
     // melihat user saja
     getAllUser: async(req, res) => {
         try {
-            const Users = await User.findAll();
+            const users = await user.findAll();
             // Filter pengguna berdasarkan peran "user"
             const userRole = 'user';
-            const filteredUsers = Users.filter(user => user.role === userRole);
+            const filteredUsers = users.filter(user => user.role === userRole);
 
             res.status(200).json(filteredUsers);
         } catch (error) {
@@ -20,12 +20,12 @@ module.exports = {
     //delete
     deleteUser: async(req, res) => {
         try {
-            const Users = await User.findByPk(req.body.id);
+            const users = await user.findByPk(req.body.id);
 
-            if (!Users) {
+            if (!users) {
                 return res.send('User not found');
             } else {
-                await Users.destroy({ where: { id: req.body.id } });
+                await users.destroy({ where: { id: req.body.id } });
                 return res.send('User deleted');
             }
         } catch (error) {
