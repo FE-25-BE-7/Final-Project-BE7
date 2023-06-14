@@ -65,7 +65,8 @@ module.exports = {
                             transaction_token: transactionToken
                         });
                     })
-                    .then((transaction) => {
+                    .then(() => {
+
                         console.log('Transaction Suksessss');
                         res.send({ token: transaction });
                     })
