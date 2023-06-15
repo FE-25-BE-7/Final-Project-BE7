@@ -9,7 +9,7 @@ const {
     deleteAllArtikel,
     deleteArtikel
 
-} = require("../controllers/adminArtikelController")
+} = require("../controllers/artikelController")
     // all user
 
 // all admin user

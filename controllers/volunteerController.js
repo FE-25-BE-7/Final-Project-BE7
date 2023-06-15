@@ -111,7 +111,7 @@ module.exports = {
 
             response = {
                 status: "SUCCESS",
-                message: "Create Artikel",
+                message: "Daftar Volunteer Sukses",
                 data: newVolunteer
             }
         } catch (error) {

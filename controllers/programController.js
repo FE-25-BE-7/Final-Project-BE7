@@ -102,7 +102,7 @@ module.exports = {
     
             response = {
                 status: "SUCCESS",
-                message: "Create Artikel",
+                message: "Create Program",
                 data: newProgram
             }
         } catch (error) {

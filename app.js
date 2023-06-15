@@ -5,8 +5,8 @@ const dotenv = require("dotenv");
 const user = require("./routes/userRouter");
 const adminRoute = require("./routes/adminUserRouter");
 const donasi = require("./routes/donasiRouter");
-const artikel = require("./routes/adminArtikelRouter");
-const progam = require("./routes/adminProgramRouter")
+const artikel = require("./routes/artikelRouter");
+const progam = require("./routes/programRouter")
 const volunteer = require("./routes/volunteerRouter")
 const listProgram = require("./routes/listProgramRouter")
 

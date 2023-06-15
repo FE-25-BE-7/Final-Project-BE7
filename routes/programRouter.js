@@ -9,7 +9,7 @@ const {
     deleteAllProgram,
     deleteProgram
 
-} = require("../controllers/adminProgramController")
+} = require("../controllers/programController")
     // all program
 
 // all admin program
