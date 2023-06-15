@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ListProgram.init({
-    id: DataTypes.STRING,
     image_one: DataTypes.STRING,
     image_two: DataTypes.STRING,
     title: DataTypes.STRING,

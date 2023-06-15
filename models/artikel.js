@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   artikel.init({
-    id: DataTypes.STRING,
     author: DataTypes.STRING,
     title: DataTypes.STRING,
     date: DataTypes.STRING,

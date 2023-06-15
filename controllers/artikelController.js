@@ -56,13 +56,6 @@ module.exports = {
     createArtikel: async(req, res) => {
         let response = {}
         let code = 200
-        if (req.body.id == "" || req.body.id == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "id cannot be blank"
-            }
-        }
         if (req.body.author == "" || req.body.author == undefined) {
             code = 422
             response = {
@@ -142,7 +135,6 @@ module.exports = {
         }
         try {
             const newArtikel = await artikel.create({
-                id: req.body.id,
                 author: req.body.author,
                 title: req.body.title,
                 date: req.body.date,
@@ -177,13 +169,6 @@ module.exports = {
     updateArtikel: async(req, res) => {
         let response = {}
         let code = 200
-        if (req.body.id == "" || req.body.id == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "id cannot be blank"
-            }
-        }
         if (req.body.author == "" || req.body.author == undefined) {
             code = 422
             response = {
@@ -267,7 +252,6 @@ module.exports = {
                 message: "Data not Found"
             }
         } else {
-            artikels.id = req.body.id,
             artikels.author = req.body.author,
             artikels.title = req.body.title,
             artikels.image = req.body.image,
