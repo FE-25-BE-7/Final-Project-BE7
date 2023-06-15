@@ -47,20 +47,6 @@ module.exports = {
     daftarVolunteer: async(req, res) => {
         let response = {}
         let code = 200
-        if (req.body.user_id == "" || req.body.user_id == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "User ID cannot be blank"
-            }
-        }
-        if (req.body.program_id == "" || req.body.program_id == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "Program ID cannot be blank"
-            }
-        }
         if (req.body.fullName == "" || req.body.fullName == undefined) {
             code = 422
             response = {
@@ -99,9 +85,6 @@ module.exports = {
 
         try {
             const newVolunteer = await volunteer.create({
-                organizer: req.body.organizer,
-                user_id: req.body.user_id,
-                program_id: req.body.program_id,
                 fullName: req.body.fullName,
                 email: req.body.email,
                 phoneNumber: req.body.phoneNumber,

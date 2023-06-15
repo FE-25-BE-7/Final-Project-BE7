@@ -5,13 +5,8 @@ module.exports = {
     await queryInterface.createTable('listPrograms', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      listprogram_id: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       image_one: {
         type: Sequelize.STRING

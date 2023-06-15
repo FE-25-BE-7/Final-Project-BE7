@@ -31,7 +31,7 @@ module.exports = {
         let response = {}
         const artikels = await artikel.findAll({
             where: {
-                id: req.body.id
+                id: req.params.id
             }
         });
     
@@ -56,11 +56,11 @@ module.exports = {
     createArtikel: async(req, res) => {
         let response = {}
         let code = 200
-        if (req.body.artikel_id == "" || req.body.artikel_id == undefined) {
+        if (req.body.id == "" || req.body.id == undefined) {
             code = 422
             response = {
                 status: "SUCCESS",
-                message: "artikel_id cannot be blank"
+                message: "id cannot be blank"
             }
         }
         if (req.body.author == "" || req.body.author == undefined) {
@@ -142,7 +142,7 @@ module.exports = {
         }
         try {
             const newArtikel = await artikel.create({
-                artikel_id: req.body.artikel_id,
+                id: req.body.id,
                 author: req.body.author,
                 title: req.body.title,
                 date: req.body.date,
@@ -177,11 +177,11 @@ module.exports = {
     updateArtikel: async(req, res) => {
         let response = {}
         let code = 200
-        if (req.body.artikel_id == "" || req.body.artikel_id == undefined) {
+        if (req.body.id == "" || req.body.id == undefined) {
             code = 422
             response = {
                 status: "SUCCESS",
-                message: "artikel_id cannot be blank"
+                message: "id cannot be blank"
             }
         }
         if (req.body.author == "" || req.body.author == undefined) {
@@ -267,7 +267,7 @@ module.exports = {
                 message: "Data not Found"
             }
         } else {
-            artikels.artikel_id = req.body.artikel_id,
+            artikels.id = req.body.id,
             artikels.author = req.body.author,
             artikels.title = req.body.title,
             artikels.image = req.body.image,
@@ -328,7 +328,8 @@ module.exports = {
 
             response = {
                 status: "SUCCESS",
-                message: "Delete Artikel"
+                message: "Delete Artikel",
+                data: artikels,
             }
         } catch (error) {
             code = 422

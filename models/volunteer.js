@@ -14,8 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   volunteer.init({
-    user_id: DataTypes.INTEGER,
-    program_id: DataTypes.INTEGER,
     fullName: DataTypes.STRING,
     email: DataTypes.STRING,
     phoneNumber: DataTypes.INTEGER,

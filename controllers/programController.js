@@ -47,11 +47,11 @@ module.exports = {
     createProgram: async (req, res) => {
         let response = {}
         let code = 200
-        if (req.body.program_id == "" || req.body.program_id == undefined) {
+        if (req.body.id == "" || req.body.id == undefined) {
             code = 422
             response = {
                 status: "SUCCESS",
-                message: "program_id cannot be blank"
+                message: "id cannot be blank"
             }
         }
         if (req.body.organizer == "" || req.body.organizer == undefined) {
@@ -92,7 +92,7 @@ module.exports = {
 
         try {
             const newProgram = await program.create({
-                program_id: req.body.program_id,
+                id: req.body.id,
                 organizer: req.body.organizer,
                 title: req.body.title,
                 image: req.body.image,
@@ -120,11 +120,11 @@ module.exports = {
     updateProgram: async (req, res) => {
         let response = {}
         let code = 200
-        if (req.body.program_id == "" || req.body.program_id == undefined) {
+        if (req.body.id == "" || req.body.id == undefined) {
             code = 422
             response = {
                 status: "SUCCESS",
-                message: "program_id cannot be blank"
+                message: "id cannot be blank"
             }
         }
         if (req.body.organizer == "" || req.body.organizer == undefined) {
@@ -175,7 +175,7 @@ module.exports = {
                 message: "Data not Found"
             }
         } else {
-            programs.program_id = req.body.program_id,
+            programs.id = req.body.id,
             programs.organizer = req.body.organizer,
             programs.title = req.body.title,
             programs.image = req.body.image,
