@@ -76,6 +76,7 @@ module.exports = {
             res.status(200).json({
                 message: "Login Successful",
                 accessToken: token,
+                data: users,
             });
         } catch (err) {
             console.log(err);
