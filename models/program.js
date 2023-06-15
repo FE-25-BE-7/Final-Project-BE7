@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   program.init({
+    program_id: DataTypes.STRING,
     organizer: DataTypes.STRING,
     title: DataTypes.STRING,
     image: DataTypes.STRING,
