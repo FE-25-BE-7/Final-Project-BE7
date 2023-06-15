@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      listprogram_id: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       image_one: {
         type: Sequelize.STRING
       },

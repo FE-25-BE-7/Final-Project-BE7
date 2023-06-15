@@ -17,10 +17,11 @@ module.exports = {
     // add list
     addList: async(req, res) => {
         try {
-            const { id, image_one, image_two, title, sub_title, description, date, organizer, link_name } = req.body;
+            const { id, listprogram_id, image_one, image_two, title, sub_title, description, date, organizer, link_name } = req.body;
 
             const newProgram = {
                 id,
+                listprogram_id,
                 image_one,
                 image_two,
                 title,

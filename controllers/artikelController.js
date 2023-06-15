@@ -56,6 +56,13 @@ module.exports = {
     createArtikel: async(req, res) => {
         let response = {}
         let code = 200
+        if (req.body.artikel_id == "" || req.body.artikel_id == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "artikel_id cannot be blank"
+            }
+        }
         if (req.body.author == "" || req.body.author == undefined) {
             code = 422
             response = {
@@ -135,6 +142,7 @@ module.exports = {
         }
         try {
             const newArtikel = await artikel.create({
+                artikel_id: req.body.artikel_id,
                 author: req.body.author,
                 title: req.body.title,
                 date: req.body.date,
@@ -169,6 +177,13 @@ module.exports = {
     updateArtikel: async(req, res) => {
         let response = {}
         let code = 200
+        if (req.body.artikel_id == "" || req.body.artikel_id == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "artikel_id cannot be blank"
+            }
+        }
         if (req.body.author == "" || req.body.author == undefined) {
             code = 422
             response = {
@@ -197,6 +212,48 @@ module.exports = {
                 message: "description cannot be blank"
             }
         }
+        if (req.body.one == "" || req.body.one == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "one cannot be blank"
+            }
+        }
+        if (req.body.two == "" || req.body.two == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "two cannot be blank"
+            }
+        }
+        if (req.body.three == "" || req.body.three == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "three cannot be blank"
+            }
+        }
+        if (req.body.four == "" || req.body.four == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "four cannot be blank"
+            }
+        }
+        if (req.body.five == "" || req.body.five == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "five cannot be blank"
+            }
+        }
+        if (req.body.six == "" || req.body.six == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "six cannot be blank"
+            }
+        }
     
         const artikels = await artikel.findOne({
             where: {
@@ -210,10 +267,17 @@ module.exports = {
                 message: "Data not Found"
             }
         } else {
+            artikels.artikel_id = req.body.artikel_id,
             artikels.author = req.body.author,
             artikels.title = req.body.title,
             artikels.image = req.body.image,
-            artikels.description = req.body.description
+            artikels.description = req.body.description,
+            artikels.one = req.body.one,
+            artikels.two = req.body.two,
+            artikels.three = req.body.three,
+            artikels.four = req.body.four,
+            artikels.five = req.body.five,
+            artikels.six = req.body.six,
             artikels.save()
             response = {
                 status: "SUCCESS",

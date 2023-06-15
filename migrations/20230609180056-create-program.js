@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      program_id: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       organizer: {
         type: Sequelize.STRING,
         allowNull: false

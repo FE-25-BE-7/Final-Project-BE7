@@ -47,6 +47,13 @@ module.exports = {
     createProgram: async (req, res) => {
         let response = {}
         let code = 200
+        if (req.body.program_id == "" || req.body.program_id == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "program_id cannot be blank"
+            }
+        }
         if (req.body.organizer == "" || req.body.organizer == undefined) {
             code = 422
             response = {
@@ -75,13 +82,6 @@ module.exports = {
                 message: "date cannot be blank"
             }
         }
-        if (req.body.kuota == "" || req.body.kuota == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "image cannot be blank"
-            }
-        }
         if (req.body.description == "" || req.body.description == undefined) {
             code = 422
             response = {
@@ -92,11 +92,11 @@ module.exports = {
 
         try {
             const newProgram = await program.create({
+                program_id: req.body.program_id,
                 organizer: req.body.organizer,
                 title: req.body.title,
                 image: req.body.image,
                 date: req.body.date,
-                kuota: req.body.kuota,
                 description: req.body.description
             });
     
@@ -120,6 +120,13 @@ module.exports = {
     updateProgram: async (req, res) => {
         let response = {}
         let code = 200
+        if (req.body.program_id == "" || req.body.program_id == undefined) {
+            code = 422
+            response = {
+                status: "SUCCESS",
+                message: "program_id cannot be blank"
+            }
+        }
         if (req.body.organizer == "" || req.body.organizer == undefined) {
             code = 422
             response = {
@@ -148,13 +155,6 @@ module.exports = {
                 message: "date cannot be blank"
             }
         }
-        if (req.body.kuota == "" || req.body.kuota == undefined) {
-            code = 422
-            response = {
-                status: "SUCCESS",
-                message: "kuota cannot be blank"
-            }
-        }
         if (req.body.description == "" || req.body.description == undefined) {
             code = 422
             response = {
@@ -175,11 +175,11 @@ module.exports = {
                 message: "Data not Found"
             }
         } else {
+            programs.program_id = req.body.program_id,
             programs.organizer = req.body.organizer,
             programs.title = req.body.title,
             programs.image = req.body.image,
             programs.date = req.body.date,
-            programs.kuota = req.body.kuota,
             programs.description = req.body.description
             programs.save()
             response = {
