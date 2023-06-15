@@ -24,26 +24,25 @@ module.exports = {
                 type: Sequelize.STRING,
             },
             description: {
-                type: Sequelize.STRING,
-                allowNull: false
+                type: Sequelize.TEXT
             },
             one: {
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             },
             two: {
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             },
             three: {
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             },
             four: {
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             },
             five: {
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             },
             six: {
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             },
             createdAt: {
                 allowNull: false,
