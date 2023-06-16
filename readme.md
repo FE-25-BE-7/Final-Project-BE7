@@ -57,7 +57,3 @@ Aplikasi ini bertujuan untuk menumbuhkan kesadaran publik terhadap isu krisis ik
 8. Link Dokumentation :
 
    https://abstracted-willow-c43.notion.site/API-Specification-Greenpeace-e4e0faa79758472891f1553863cc8bfd
-
-9. Desain Database :
-
-Desain Database.png
