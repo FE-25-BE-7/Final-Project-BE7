@@ -60,4 +60,4 @@ Aplikasi ini bertujuan untuk menumbuhkan kesadaran publik terhadap isu krisis ik
 
 9. Desain Database :
 
-![image.png](C:\Kuliah\MSIB\Tugas\Project\Final Project\Final-Project-BE7\Desain Database.png)
+Desain Database.png
