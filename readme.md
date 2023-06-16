@@ -1,4 +1,4 @@
-### GreenPeace - Skilvul
+# GreenPeace - Skilvul
 
 ---
 
@@ -8,7 +8,7 @@ Aplikasi ini bertujuan untuk menumbuhkan kesadaran publik terhadap isu krisis ik
 
 ---
 
-# Kelompok Front-End 25 & Back-End 7
+## Kelompok Front-End 25 & Back-End 7
 
 1. FE - Panggih Dwi Alamsyah
 
@@ -22,7 +22,7 @@ Aplikasi ini bertujuan untuk menumbuhkan kesadaran publik terhadap isu krisis ik
 
 ---
 
-# Lampiran :
+## Lampiran :
 
 1. Link BRD (Deskripsi, Permasalahan, Fitur, User Target dan Timeline) :
 
