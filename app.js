@@ -6,9 +6,8 @@ const user = require("./routes/userRouter");
 const adminRoute = require("./routes/adminUserRouter");
 const donasi = require("./routes/donasiRouter");
 const artikel = require("./routes/artikelRouter");
-const progam = require("./routes/programRouter")
-const volunteer = require("./routes/volunteerRouter")
-const listProgram = require("./routes/listProgramRouter")
+const progam = require("./routes/programRouter");
+const listProgram = require("./routes/listProgramRouter");
 
 
 // get config vars
@@ -26,7 +25,6 @@ app.use(donasi);
 app.use(adminRoute);
 app.use(artikel);
 app.use(progam);
-app.use(volunteer);
 app.use(listProgram);
 
 app.listen(PORT, () => {
